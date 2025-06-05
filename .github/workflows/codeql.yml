@@ -1,14 +1,14 @@
-name: CodeQL
+name: CodeQL Scan
 
 on:
   push:
-    branches: ["**"]
+    branches: [ "feature/**" ]
   pull_request:
-    branches: ["**"]
+    branches: [ "feature/**" ]
 
 jobs:
   analyze:
-    name: CodeQL Scan
+    name: CodeQL Analysis
     runs-on: ubuntu-latest
 
     permissions:
@@ -19,19 +19,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Dependencies
-        run: |
-          if [ -f package.json ]; then
-            npm install
-          elif [ -f requirements.txt ]; then
-            pip install -r requirements.txt
-          fi
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+      - uses: github/codeql-action/init@v3
         with:
-          languages: javascript
+          languages: javascript, python
 
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+      - uses: github/codeql-action/autobuild@v3
 
+      - uses: github/codeql-action/analyze@v3
