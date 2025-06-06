@@ -21,7 +21,7 @@ jobs:
 
       - uses: github/codeql-action/init@v3
         with:
-          languages: javascript, python
+          languages: javascript
 
       - uses: github/codeql-action/autobuild@v3
 
